@@ -14,11 +14,12 @@ StartDate DATE,
 -------UC3----------
 ----Inserting values into Employee_payroll table
 
-INSERT INTO employee_payroll VALUES('Arjun','30000','12-dec-2016');
-INSERT INTO employee_payroll VALUES('Raj','40000','12-jan-2010');
-INSERT INTO employee_payroll VALUES('Ramesh','15000','20-mar-2018');
-INSERT INTO employee_payroll VALUES('SURESH','10000','15-FEB-2010');
-INSERT INTO employee_payroll VALUES('Rashmi','50000','13-apr-2019');
+INSERT INTO employee_payroll VALUES
+('Arjun','30000','12-dec-2016'),
+('Raj','40000','12-jan-2010'),
+('Ramesh','15000','20-mar-2018'),
+('SURESH','10000','15-FEB-2010'),
+('Rashmi','50000','13-apr-2019');
 
 ------UC4---------
 ---Retrieving all the Tables valuue----
@@ -28,9 +29,9 @@ SELECT Name,Salary FROM employee_payroll;
 
 -----------------UC5---------------------
 -----Retrieving data fusing WHERE keyword---
-SELECT Id,Name,StartDate FROM employee_payroll WHERE Name='Arjun';
+SELECT Id,Name,StartDate,Salary FROM employee_payroll WHERE Name='Arjun' OR Salary = '50000';
 
-SELECT Name,Salary,Id FROM employee_payroll WHERE Salary = '50000';
+
 ------Retrieving data using CAST Keyword--------
 SELECT * FROM employee_payroll WHERE StartDate BETWEEN CAST('01-01-2016' as date) AND  CAST(GETDATE() as date);
 
@@ -45,17 +46,16 @@ UPDATE employee_payroll SET Gender='F' WHERE Name='Rashmi';
 
 ----------------UC7------------
 ------------Finding SUM,AVG,MIN,MAX,COUNT----------
-SELECT SUM(Salary) as SumOfSalary FROM employee_payroll;
-SELECT SUM(Salary) as SumOfSalary FROM employee_payroll WHERE Gender='M' GROUP BY Gender;
 SELECT SUM(Salary) as SumOfSalary FROM employee_payroll WHERE Gender='F' GROUP BY Gender;
 
-SELECT AVG(Salary) as Average FROM employee_payroll WHERE Gender='M' GROUP BY Gender;
+SELECT 
+AVG(Salary) as Average,
+MIN(Salary) as Minimum,
+MAX(Salary) as Maximum,
+COUNT(Id) as Number_of_Emp,
+SUM(Salary) as SumOfSalary
+FROM employee_payroll WHERE Gender='M' GROUP BY Gender;
 
-SELECT MIN(Salary) as Minimum FROM employee_payroll WHERE Gender='M' GROUP BY Gender;
-
-SELECT MAX(Salary) as Maximum FROM employee_payroll;
-
-SELECT COUNT(Id) as Number_of_Emp FROM employee_payroll WHERE Gender='M' GROUP BY Gender;
 
 ------------UC8---------------
 -----Extending employee_payroll table-----------
@@ -67,8 +67,9 @@ ALTER TABLE employee_payroll ADD Emp_Address varchar(20) DEFAULT 'INDIA';
 
 ALTER TABLE employee_payroll ADD Emp_DEPT varchar(10)DEFAULT 'HR';
 
-INSERT INTO employee_payroll VALUES('SHIVANI','25000','23-aug-2019','F','983364738','Mysore','CS');
-INSERT INTO employee_payroll VALUES('Shivam','25000','23-feb-2019','M','9833645538',DEFAULT,DEFAULT);
+INSERT INTO employee_payroll VALUES
+('SHIVANI','25000','23-aug-2019','F','983364738','Mysore','CS'),
+('Shivam','25000','23-feb-2019','M','9833645538',DEFAULT,DEFAULT);
 
 -----------------UC9----------------
 ------Extending employee_payroll table-------
@@ -87,8 +88,9 @@ UPDATE employee_payroll SET Phone_Number='9878887670',Emp_DEPT='Resource', Emp_A
 
 ----------------------------------
 
-INSERT INTO employee_payroll VALUES('Terissa','48548','20-jan-2020','F','8758989','Kolkatta','Sales','54767',4875,4555,54767,376734);
-INSERT INTO employee_payroll VALUES('Terissa','48548','20-dec-2020','F','8758989','Kolkatta','Marketing','54767',4875,4555,54767,376734);
+INSERT INTO employee_payroll VALUES
+('Terissa','48548','20-jan-2020','F','8758989','Kolkatta','Sales','54767',4875,4555,54767,376734),
+('Terissa','48548','20-dec-2020','F','8758989','Kolkatta','Marketing','54767',4875,4555,54767,376734);
 select * from employee_payroll where Name='Terissa';
 
 
